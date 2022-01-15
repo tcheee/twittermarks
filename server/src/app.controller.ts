@@ -27,7 +27,6 @@ export class AppController {
     @Res({ passthrough: true }) response: Response,
   ) {
     this.appService.logUser(req.user._json);
-    // send in a spreadsheet directly
     response.cookie('username', req.user.username);
     response.cookie('image', req.user.photos[0].value || null);
     response.cookie('accessToken', req.user.accessToken);

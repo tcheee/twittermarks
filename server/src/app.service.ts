@@ -190,7 +190,7 @@ export class AppService {
     let ask = true;
     let next_token = null;
     let i = 0;
-    let numberOfTweetsMax = 99;
+    let numberOfTweetsMax = 4999;
     const url = `https://api.twitter.com/2/users/${userId}/liked_tweets`;
     console.time('timing');
     while (ask) {
