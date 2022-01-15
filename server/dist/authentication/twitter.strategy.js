@@ -18,7 +18,7 @@ let TwitterStrategy = class TwitterStrategy extends (0, passport_1.PassportStrat
         super({
             consumerKey: 'pxtR3lLg2RNBQf7d10nl3uXVv',
             consumerSecret: 'EJms3OjqDLswsOfdJx1kF5yd0mo7iUb4I3XrdHEqSgzjpfd1QY',
-            callbackURL: 'http://localhost:5000/api/auth/twitter/callback',
+            callbackURL: process.env.URL + '/api/auth/twitter/callback',
             proxy: true,
         });
     }
