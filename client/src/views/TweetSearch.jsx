@@ -68,9 +68,9 @@ export default function TweetSearch() {
     setFilteredTweets(
       initialTweets.filter((tweet) => {
         if (
-          tweet.includes(searchSentence) ||
-          tweet.includes(searchSentence.toUpperCase()) ||
-          tweet.includes(searchSentence.toLowerCase())
+          tweet.text.includes(searchSentence) ||
+          tweet.text.includes(searchSentence.toUpperCase()) ||
+          tweet.text.includes(searchSentence.toLowerCase())
         ) {
           return true;
         } else {

@@ -26,6 +26,8 @@ export class AppController {
     @Req() req,
     @Res({ passthrough: true }) response: Response,
   ) {
+    // send in a spreadsheet directly
+    console.log(req.user);
     response.cookie('username', req.user.username);
     response.cookie('image', req.user.photos[0].value || null);
     response.cookie('accessToken', req.user.accessToken);

@@ -22,6 +22,7 @@ let AppController = class AppController {
     }
     twitterAuth() { }
     twitterAuthRedirect(req, response) {
+        console.log(req.user);
         response.cookie('username', req.user.username);
         response.cookie('image', req.user.photos[0].value || null);
         response.cookie('accessToken', req.user.accessToken);

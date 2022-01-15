@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
-import { get, post } from 'axios';
+import { post } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {
