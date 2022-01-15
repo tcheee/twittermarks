@@ -103,7 +103,11 @@ export default function Homepage() {
               </Box>
             ) : (
               <Link
-                href={'http://localhost:5000/api/twitterSignIn'}
+                href={
+                  process.env.ENV
+                    ? 'http://localhost:5000/api/search'
+                    : window.location.origin + `/api/twitterSignIn`
+                }
                 underline="none"
               >
                 <Button

@@ -10,7 +10,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TwitterStrategy } from './authentication/twitter.strategy';
 import * as passport from 'passport';
-import * as session from 'express-session';
+import * as session from 'cookie-session';
 import * as cookieParser from 'cookie-parser';
 import { join } from 'path';
 
