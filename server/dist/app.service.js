@@ -10,6 +10,7 @@ exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
 const axios_1 = require("axios");
 const crypto = require("crypto");
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 let AppService = class AppService {
     twitterLogin(req) {
         if (!req.user) {
@@ -20,6 +21,27 @@ let AppService = class AppService {
                 message: 'working',
                 user: req.user,
             };
+        }
+    }
+    async logUser(user) {
+        try {
+            const doc = new GoogleSpreadsheet('1WwKJFUP4ft1pG3ki0MYcEcH_bffz04BukM-pThW28c4');
+            await doc.useServiceAccountAuth({
+                client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+                private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            });
+            await doc.loadInfo();
+            const sheet = doc.sheetsByIndex[0];
+            sheet.addRow({
+                name: user.name,
+                username: user.screen_name,
+                location: user.location,
+                date: Date.now(),
+                link: `https://twitter.com/${user.screen_name}`,
+            });
+        }
+        catch (err) {
+            console.log(err);
         }
     }
     generateTwitterSignatureString(method, url, url_parameter, nonce, timestamp, appConsumerKey, userToken) {

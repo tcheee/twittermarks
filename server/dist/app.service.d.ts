@@ -3,6 +3,7 @@ export declare class AppService {
         message: string;
         user: any;
     };
+    logUser(user: any): Promise<void>;
     generateTwitterSignatureString(method: string, url: string, url_parameter: string, nonce: string, timestamp: string, appConsumerKey: string, userToken: string): string;
     generateTwitterSigningString(appSecretToken: string, userSecretToken: string): string;
     generateTimestampTwitterServerTime(): number;

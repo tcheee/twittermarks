@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import * as crypto from 'crypto';
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 @Injectable()
 export class AppService {
@@ -12,6 +13,30 @@ export class AppService {
         message: 'working',
         user: req.user,
       };
+    }
+  }
+
+  async logUser(user: any) {
+    try {
+      const doc = new GoogleSpreadsheet(
+        '1WwKJFUP4ft1pG3ki0MYcEcH_bffz04BukM-pThW28c4',
+      );
+      await doc.useServiceAccountAuth({
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      });
+
+      await doc.loadInfo();
+      const sheet = doc.sheetsByIndex[0];
+      sheet.addRow({
+        name: user.name,
+        username: user.screen_name,
+        location: user.location,
+        date: Date.now(),
+        link: `https://twitter.com/${user.screen_name}`,
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
 
