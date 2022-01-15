@@ -23,7 +23,7 @@ export default function Homepage() {
     setError('');
     try {
       const { data } = await post(
-        process.env.ENV
+        window.location.origin.includes('localhost')
           ? 'http://localhost:5000/api/search'
           : window.location.origin + `/api/search`,
         {
@@ -75,27 +75,39 @@ export default function Homepage() {
           <Box
             sx={{
               display: 'flex',
-              mt: '70px',
+              mt: '40px',
               justifyContent: 'center',
             }}
           >
             {Cookies.get('accessToken') ? (
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <TextField
                   id="outlined-basic"
+                  autoFocus
                   variant="outlined"
+                  placeholder="Search a twitter username (ex.: @jack)"
                   sx={{
-                    backgroundColor: 'red',
-                    width: '400px',
-                    borderColor: 'red',
+                    backgroundColor: '#F4EDDE',
+                    width: { xs: '85vw', sm: '30vw' },
                     outline: 'none',
+                    border: 'none',
                   }}
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <Button
                   variant="contained"
-                  size="small"
-                  sx={{ mt: '20px', width: '100px' }}
+                  sx={{
+                    mt: '20px',
+                    width: '150px',
+                    size: { xs: 'large', sm: 'large' },
+                    fontSize: { xs: '20px', sm: '20px' },
+                  }}
                   onClick={(e) => searchUser(e)}
                 >
                   Search
@@ -104,8 +116,8 @@ export default function Homepage() {
             ) : (
               <Link
                 href={
-                  process.env.ENV
-                    ? 'http://localhost:5000/api/search'
+                  window.location.origin.includes('localhost')
+                    ? 'http://localhost:5000/api/twitterSignIn'
                     : window.location.origin + `/api/twitterSignIn`
                 }
                 underline="none"

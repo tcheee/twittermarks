@@ -165,7 +165,7 @@ export class AppService {
     let ask = true;
     let next_token = null;
     let i = 0;
-    let numberOfTweetsMax = 101;
+    let numberOfTweetsMax = 99;
     const url = `https://api.twitter.com/2/users/${userId}/liked_tweets`;
     console.time('timing');
     while (ask) {
@@ -197,15 +197,16 @@ export class AppService {
         ask = false;
         console.log(err);
         console.log(err.data);
-        if (err.data.status === 429) {
+        if (err.response.data.status === 429) {
           const timing_reset = err.response.headers['x-rate-limit-reset'];
           const myDate = new Date(timing_reset * 1000);
           console.log(myDate);
+          return { success: false, nextTime: myDate, data: tweets };
         }
       }
     }
     console.timeEnd('timing');
 
-    return tweets;
+    return { success: true, data: tweets };
   }
 }

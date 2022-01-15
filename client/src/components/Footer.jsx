@@ -32,7 +32,11 @@ const Footer = () => {
           </Link>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <Link href="https://twitter.com/thomas_cherret" underline="none">
+          <Link
+            href="https://twitter.com/thomas_cherret"
+            underline="none"
+            target="_blank"
+          >
             <Typography
               noWrap
               component="div"

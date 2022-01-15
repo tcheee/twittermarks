@@ -32,8 +32,8 @@ export default function TweetSearch() {
       try {
         setLoading(true);
         const { data } = await post(
-          process.env.ENV
-            ? 'http://localhost:5000/api/search'
+          window.location.origin.includes('localhost')
+            ? 'http://localhost:5000/api/getLikes'
             : window.location.origin + `/api/getLikes`,
           {
             accessToken: Cookies.get('accessToken'),
@@ -41,10 +41,11 @@ export default function TweetSearch() {
             userId: user_id,
           }
         );
-        console.log(data);
-        setInitialTweets(data);
-        setFilteredTweets(data);
-        setLoading(false);
+        if (data.success) {
+          setInitialTweets(data.data);
+          setFilteredTweets(data.data);
+          setLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -65,9 +66,17 @@ export default function TweetSearch() {
     const searchSentence = event.target.value;
     setSearch(searchSentence);
     setFilteredTweets(
-      initialTweets.filter((tweet) =>
-        tweet.text.includes(searchSentence || searchSentence.toUpperCase())
-      )
+      initialTweets.filter((tweet) => {
+        if (
+          tweet.includes(searchSentence) ||
+          tweet.includes(searchSentence.toUpperCase()) ||
+          tweet.includes(searchSentence.toLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      })
     );
   };
 
@@ -89,14 +98,16 @@ export default function TweetSearch() {
           style={{ borderRadius: '50%', marginTop: '5px' }}
         />
         <Typography color="#FFFFFF" sx={{ mt: '10px' }}>
-          Searching @{username} tweets
+          Searching @{username} likes ❤️
         </Typography>
         <TextField
           id="outlined-basic"
           variant="outlined"
+          autoFocus
+          placeholder=""
           sx={{
-            backgroundColor: 'red',
-            width: '400px',
+            backgroundColor: '#F4EDDE',
+            width: { xs: '80vw', sm: '20vw' },
             borderColor: 'red',
             outline: 'none',
           }}
@@ -106,7 +117,7 @@ export default function TweetSearch() {
       <Grid
         container
         spacing={4}
-        sx={{ mt: '10px', overflow: 'auto', maxHeight: 530 }}
+        sx={{ mt: '10px', overflow: 'auto', maxHeight: { xs: 380, sm: 530 } }}
       >
         {!loading ? (
           filteredTweets.map((tweet) => (
@@ -130,9 +141,9 @@ export default function TweetSearch() {
               >
                 <Card
                   sx={{
-                    maxWidth: 345,
+                    maxWidth: { xs: '90vw', sm: '320px' },
                     minHeight: 220,
-                    minWidth: 320,
+                    minWidth: { xs: '90vw', sm: '320px' },
                     display: 'flex',
                     justifyContent: 'center',
                     flexDirection: 'column',
