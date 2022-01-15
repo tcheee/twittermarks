@@ -64,9 +64,10 @@ export default function TweetSearch() {
   const searchTweet = (event) => {
     const searchSentence = event.target.value;
     setSearch(searchSentence);
-    console.log(searchSentence);
     setFilteredTweets(
-      initialTweets.filter((tweet) => tweet.text.includes(searchSentence))
+      initialTweets.filter((tweet) =>
+        tweet.text.includes(searchSentence || searchSentence.toUpperCase())
+      )
     );
   };
 
