@@ -44,9 +44,9 @@ export default function Homepage() {
         navigate(
           `/search?user_id=${data.data.id}&username=${data.data.username}&image=${data.data.profile_image_url}`
         );
-      } else if (data.data === 'Nothing was found.') {
+      } else if (data.error === 'Nothing was found.') {
         setError('No user was found. Please try again.');
-      } else if (data.data === 'limit') {
+      } else if (data.error === 'limit') {
         setError(
           'You reach the twitter limit for search. Please come back at ' +
             data.time

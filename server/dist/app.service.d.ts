@@ -14,25 +14,30 @@ export declare class AppService {
         success: boolean;
         data: any;
         sucess?: undefined;
+        error?: undefined;
         time?: undefined;
     } | {
         sucess: boolean;
-        data: string;
+        data: any;
+        error: string;
         success?: undefined;
         time?: undefined;
     } | {
         sucess: boolean;
-        data: string;
+        data: any;
+        error: string;
         time: Date;
         success?: undefined;
     }>;
     getLikes(accessToken: string, secretToken: string, userId: string): Promise<{
         success: boolean;
-        nextTime: Date;
+        error: string;
+        time: Date;
         data: any[];
     } | {
         success: boolean;
         data: any[];
-        nextTime?: undefined;
+        error?: undefined;
+        time?: undefined;
     }>;
 }

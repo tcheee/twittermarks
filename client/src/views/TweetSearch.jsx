@@ -18,6 +18,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default function TweetSearch() {
   const [setSearch] = useState('');
+  const [error, setError] = useState(null);
   const [initialTweets, setInitialTweets] = useState([]);
   const [filteredTweets, setFilteredTweets] = useState([]);
   const [username, setUsername] = useState('');
@@ -41,12 +42,20 @@ export default function TweetSearch() {
           }
         );
         if (data.success) {
+          setError(null);
           setInitialTweets(data.data);
           setFilteredTweets(data.data);
-          setLoading(false);
+        } else if (data.error === 'limit') {
+          setError(
+            'You reach the twitter limit for search. Please come back at ' +
+              data.time +
+              ' (UTC time)'
+          );
         }
+        setLoading(false);
       } catch (err) {
         console.log(err);
+        setError(err);
       }
     }
 
@@ -112,6 +121,20 @@ export default function TweetSearch() {
           }}
           onChange={(e) => searchTweet(e)}
         />
+        {error ? (
+          <Typography
+            color="#FFFFFF"
+            textAlign="center"
+            sx={{
+              mt: '10px',
+              color: '#ff6961',
+              fontSize: '12px',
+              fontFamily: 'system-ui',
+            }}
+          >
+            {error}
+          </Typography>
+        ) : null}
         {loading ? (
           <Typography
             color="#FFFFFF"
@@ -168,7 +191,7 @@ export default function TweetSearch() {
                 >
                   <CardContent>
                     <Box>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="#FFFFFF">
                         {tweet.text}
                       </Typography>
                     </Box>

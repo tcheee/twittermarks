@@ -9,25 +9,30 @@ export declare class AppController {
         success: boolean;
         data: any;
         sucess?: undefined;
+        error?: undefined;
         time?: undefined;
     } | {
         sucess: boolean;
-        data: string;
+        data: any;
+        error: string;
         success?: undefined;
         time?: undefined;
     } | {
         sucess: boolean;
-        data: string;
+        data: any;
+        error: string;
         time: Date;
         success?: undefined;
     }>;
     getLikes(body: any): Promise<{
         success: boolean;
-        nextTime: Date;
+        error: string;
+        time: Date;
         data: any[];
     } | {
         success: boolean;
         data: any[];
-        nextTime?: undefined;
+        error?: undefined;
+        time?: undefined;
     }>;
 }

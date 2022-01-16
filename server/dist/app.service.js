@@ -107,15 +107,14 @@ let AppService = class AppService {
                 return { success: true, data: data.data };
             }
             else {
-                return { sucess: false, data: 'Nothing was found.' };
+                return { sucess: false, data: null, error: 'Nothing was found.' };
             }
         }
         catch (err) {
             if (err.response.data.status === 429) {
                 const timing_reset = err.response.headers['x-rate-limit-reset'];
                 const myDate = new Date(timing_reset * 1000);
-                console.log(myDate);
-                return { sucess: false, data: 'limit', time: myDate };
+                return { sucess: false, data: null, error: 'limit', time: myDate };
             }
         }
     }
@@ -149,13 +148,11 @@ let AppService = class AppService {
             }
             catch (err) {
                 ask = false;
-                console.log(err);
-                console.log(err.data);
+                console.log(err.response.data);
                 if (err.response.data.status === 429) {
                     const timing_reset = err.response.headers['x-rate-limit-reset'];
                     const myDate = new Date(timing_reset * 1000);
-                    console.log(myDate);
-                    return { success: false, nextTime: myDate, data: tweets };
+                    return { success: false, error: 'limit', time: myDate, data: tweets };
                 }
             }
         }
