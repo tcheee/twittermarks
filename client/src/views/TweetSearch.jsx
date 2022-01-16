@@ -17,7 +17,7 @@ import {
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default function TweetSearch() {
-  const [setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const [error, setError] = useState(null);
   const [initialTweets, setInitialTweets] = useState([]);
   const [filteredTweets, setFilteredTweets] = useState([]);
@@ -72,13 +72,14 @@ export default function TweetSearch() {
 
   const searchTweet = (event) => {
     const searchSentence = event.target.value;
+    console.log(searchSentence.toUpperCase());
     setSearch(searchSentence);
     setFilteredTweets(
       initialTweets.filter((tweet) => {
         if (
           tweet.text.includes(searchSentence) ||
-          tweet.text.includes(searchSentence.toUpperCase()) ||
-          tweet.text.includes(searchSentence.toLowerCase())
+          tweet.text.toUpperCase().includes(searchSentence.toUpperCase()) ||
+          tweet.text.toLowerCase().includes(searchSentence.toLowerCase())
         ) {
           return true;
         } else {
