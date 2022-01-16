@@ -37,10 +37,7 @@ export default function Homepage() {
           username: username[0] === '@' ? username.substring(1) : username,
         }
       );
-      console.log(data);
       if (data.success) {
-        console.log(data.data);
-        console.log(data.data.id);
         navigate(
           `/search?user_id=${data.data.id}&username=${data.data.username}&image=${data.data.profile_image_url}`
         );
