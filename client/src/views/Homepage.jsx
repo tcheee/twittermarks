@@ -44,6 +44,7 @@ export default function Homepage() {
         navigate(
           `/search?user_id=${data.data.id}&username=${data.data.username}&image=${data.data.profile_image_url}`
         );
+        return;
       } else if (data.error === 'Nothing was found.') {
         setError('No user was found. Please try again.');
       } else if (data.error === 'limit') {

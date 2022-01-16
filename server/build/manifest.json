@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Twittermarks",
+  "name": "Easily browse a twitter user's likes!",
   "icons": [
     {
       "src": "favicon.ico",
