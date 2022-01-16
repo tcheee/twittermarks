@@ -16,8 +16,8 @@ const common_1 = require("@nestjs/common");
 let TwitterStrategy = class TwitterStrategy extends (0, passport_1.PassportStrategy)(passport_twitter_1.Strategy, 'twitter') {
     constructor() {
         super({
-            consumerKey: 'pxtR3lLg2RNBQf7d10nl3uXVv',
-            consumerSecret: 'EJms3OjqDLswsOfdJx1kF5yd0mo7iUb4I3XrdHEqSgzjpfd1QY',
+            consumerKey: process.env.APP_ACCESS_TOKEN,
+            consumerSecret: process.env.APP_SECRET_TOKEN,
             callbackURL: process.env.URL + 'api/auth/twitter/callback',
             proxy: true,
         });
