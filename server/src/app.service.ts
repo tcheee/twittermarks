@@ -181,7 +181,12 @@ export class AppService {
         return { sucess: false, data: 'Nothing was found.' };
       }
     } catch (err) {
-      console.log(err);
+      if (err.response.data.status === 429) {
+        const timing_reset = err.response.headers['x-rate-limit-reset'];
+        const myDate = new Date(timing_reset * 1000);
+        console.log(myDate);
+        return { sucess: false, data: 'limit', time: myDate };
+      }
     }
   }
 

@@ -9,7 +9,6 @@ import {
   Typography,
   Box,
   Link,
-  Button,
   TextField,
   Card,
   CardContent,
@@ -18,7 +17,7 @@ import {
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default function TweetSearch() {
-  const [search, setSearch] = useState('');
+  const [setSearch] = useState('');
   const [initialTweets, setInitialTweets] = useState([]);
   const [filteredTweets, setFilteredTweets] = useState([]);
   const [username, setUsername] = useState('');
@@ -113,6 +112,21 @@ export default function TweetSearch() {
           }}
           onChange={(e) => searchTweet(e)}
         />
+        {loading ? (
+          <Typography
+            color="#FFFFFF"
+            textAlign="center"
+            sx={{
+              mt: { xs: '30vh', sm: '10vh' },
+              fontWeight: 'bold',
+              fontSize: '14px',
+            }}
+          >
+            Given the twitter architecture, it can take up to 1 minute to load
+            the 5000 most recent likes 😴. But to lose patience is to lose the
+            battle.
+          </Typography>
+        ) : null}
       </Box>
       <Grid
         container
@@ -154,11 +168,7 @@ export default function TweetSearch() {
                 >
                   <CardContent>
                     <Box>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        color="#FFFFFF"
-                      >
+                      <Typography variant="body2" color="text.secondary">
                         {tweet.text}
                       </Typography>
                     </Box>
@@ -169,28 +179,26 @@ export default function TweetSearch() {
             </Grid>
           ))
         ) : (
-          <Box>
-            <Loader
-              lines={14}
-              length={15}
-              width={5}
-              radius={30}
-              corners={1}
-              rotate={0}
-              direction={1}
-              color="#FFFFFF"
-              speed={0.5}
-              trail={60}
-              shadow={false}
-              hwaccel={false}
-              className="spinner"
-              zIndex={2e9}
-              top="50%"
-              left="50%"
-              scale={1.0}
-              loadedClassName="loadedContent"
-            />
-          </Box>
+          <Loader
+            lines={14}
+            length={15}
+            width={5}
+            radius={30}
+            corners={1}
+            rotate={0}
+            direction={1}
+            color="#1DA1F2"
+            speed={0.5}
+            trail={60}
+            shadow={false}
+            hwaccel={false}
+            className="spinner"
+            zIndex={2e9}
+            top="50%"
+            left="50%"
+            scale={1.0}
+            loadedClassName="loadedContent"
+          />
         )}
       </Grid>
     </Container>

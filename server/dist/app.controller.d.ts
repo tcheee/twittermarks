@@ -9,9 +9,16 @@ export declare class AppController {
         success: boolean;
         data: any;
         sucess?: undefined;
+        time?: undefined;
     } | {
         sucess: boolean;
         data: string;
+        success?: undefined;
+        time?: undefined;
+    } | {
+        sucess: boolean;
+        data: string;
+        time: Date;
         success?: undefined;
     }>;
     getLikes(body: any): Promise<{
