@@ -72,17 +72,12 @@ export default function TweetSearch() {
   const searchTweet = (event) => {
     const searchSentence = event.target.value;
     setFilteredTweets(
-      initialTweets.filter((tweet) => {
-        if (
+      initialTweets.filter(
+        (tweet) =>
           tweet.text.includes(searchSentence) ||
-          tweet.text.toUpperCase().includes(searchSentence.toUpperCase()) ||
-          tweet.text.toLowerCase().includes(searchSentence.toLowerCase())
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      })
+          tweet.text.toUpperCase().includes(searchSentence) ||
+          tweet.text.toLowerCase().includes(searchSentence)
+      )
     );
   };
 
